@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:dynamic_tools/dynamic_tools.dart';
 
 extension ContextExtensions on BuildContext {
   /// Allow to get the [NavigatorState] from the current [BuildContext].
