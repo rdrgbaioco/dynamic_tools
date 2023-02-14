@@ -14,8 +14,10 @@ class ActionBack extends StatelessWidget {
 
   /// If true, the back action will be blocked.
   final bool? activeBack;
+
   /// The action to be performed before the back action.
   final void Function()? onBack;
+
   /// The child widget, usually a page.
   final Widget child;
 

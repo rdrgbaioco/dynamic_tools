@@ -1,7 +1,7 @@
 import 'package:dynamic_tools/dynamic_tools.dart';
 import 'package:dynamic_tools/sources/tools/task/values/unit.dart' as type_unit;
 
-/// Return it when the result of a [TaskObject] is
+/// Return it when the task of a [TaskObject] is
 /// the expected value.
 ///
 @immutable
@@ -10,8 +10,8 @@ class Successful<S extends Object, E extends Object>
   /// Receives the [S] param as
   /// the successful result.
   const Successful(
-      this._successful,
-      );
+    this._successful,
+  );
 
   /// Build a `Successful` with `Unit` value.
   /// ```dart
@@ -39,9 +39,9 @@ class Successful<S extends Object, E extends Object>
 
   @override
   W fold<W>(
-      W Function(S success) onSuccess,
-      W Function(E error) onFailure,
-      ) {
+    W Function(S success) onSuccess,
+    W Function(E error) onFailure,
+  ) {
     return onSuccess(_successful);
   }
 
@@ -53,15 +53,15 @@ class Successful<S extends Object, E extends Object>
 
   @override
   TaskObject<W, E> flatMap<W extends Object>(
-      TaskObject<W, E> Function(S success) fn,
-      ) {
+    TaskObject<W, E> Function(S success) fn,
+  ) {
     return fn(_successful);
   }
 
   @override
   TaskObject<S, W> flatMapError<W extends Object>(
-      TaskObject<S, W> Function(E error) fn,
-      ) {
+    TaskObject<S, W> Function(E error) fn,
+  ) {
     return Successful<S, W>(_successful);
   }
 

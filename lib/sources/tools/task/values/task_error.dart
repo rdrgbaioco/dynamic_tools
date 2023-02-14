@@ -1,8 +1,7 @@
 import 'package:dynamic_tools/dynamic_tools.dart';
 import 'package:dynamic_tools/sources/tools/task/values/unit.dart' as type_unit;
 
-
-/// Return it when the result of a [TaskObject] is
+/// Return it when the task of a [TaskObject] is
 /// not the expected value.
 ///
 @immutable
@@ -14,7 +13,7 @@ class TaskError<S extends Object, E extends Object>
 
   /// Build a `TaskError` with `Unit` value.
   /// ```dart
-  /// Failure.unit() == Failure(unit)
+  /// TaskError.unit() == TaskError(unit)
   /// ```
   static TaskError<S, type_unit.Unit> unit<S extends Object>() {
     return TaskError<S, type_unit.Unit>(type_unit.unit);
@@ -33,13 +32,13 @@ class TaskError<S extends Object, E extends Object>
 
   @override
   bool operator ==(Object other) => //
-  other is TaskError && other._error == _error;
+      other is TaskError && other._error == _error;
 
   @override
   W fold<W>(
-      W Function(S succcess) onSuccess,
-      W Function(E error) onError,
-      ) {
+    W Function(S succcess) onSuccess,
+    W Function(E error) onError,
+  ) {
     return onError(_error);
   }
 
@@ -51,15 +50,15 @@ class TaskError<S extends Object, E extends Object>
 
   @override
   TaskObject<W, E> flatMap<W extends Object>(
-      TaskObject<W, E> Function(S success) fn,
-      ) {
+    TaskObject<W, E> Function(S success) fn,
+  ) {
     return TaskError<W, E>(_error);
   }
 
   @override
   TaskObject<S, W> flatMapError<W extends Object>(
-      TaskObject<S, W> Function(E error) fn,
-      ) {
+    TaskObject<S, W> Function(E error) fn,
+  ) {
     return fn(_error);
   }
 
@@ -70,7 +69,8 @@ class TaskError<S extends Object, E extends Object>
 
   @override
   S getOrThrow() {
-    throw _error!;
+    // Add error on exception
+    throw Exception(_error);
   }
 
   @override

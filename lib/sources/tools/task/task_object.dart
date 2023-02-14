@@ -29,19 +29,19 @@ abstract class TaskObject<S extends Object, E extends Object> {
   /// Returns the value of [TaskError] or null.
   E? exceptionOrNull();
 
-  /// Returns true if the current result is an [Failure].
+  /// Returns true if the current result is an [TaskError].
   bool isError();
 
-  /// Returns true if the current result is a [Success].
+  /// Returns true if the current result is a [Successful].
   bool isSuccess();
 
   /// Returns the result of onSuccess for the encapsulated value
   /// if this instance represents `Successful` or the result of onError function
   /// for the encapsulated value if it is `TaskError`.
   W fold<W>(
-      W Function(S success) onSuccess,
-      W Function(E error) onError,
-      );
+    W Function(S success) onSuccess,
+    W Function(E error) onError,
+  );
 
   /// Returns a new `Task`, mapping any `Successful` value
   /// using the given transformation.
@@ -54,13 +54,14 @@ abstract class TaskObject<S extends Object, E extends Object> {
   /// Returns a new `Task`, mapping any `Successful` value
   /// using the given transformation and unwrapping the produced `Task`.
   TaskObject<W, E> flatMap<W extends Object>(
-      TaskObject<W, E> Function(S success) fn);
+    TaskObject<W, E> Function(S success) fn,
+  );
 
   /// Returns a new `Task`, mapping any `Error` value
   /// using the given transformation and unwrapping the produced `Task`.
   TaskObject<S, W> flatMapError<W extends Object>(
-      TaskObject<S, W> Function(E error) fn,
-      );
+    TaskObject<S, W> Function(E error) fn,
+  );
 
   /// Change the [Successful] value.
   TaskObject<W, E> pure<W extends Object>(W success);
@@ -72,7 +73,7 @@ abstract class TaskObject<S extends Object, E extends Object> {
   Task<S, E> toTask();
 
   /// Swap the values contained inside the [Successful] and [TaskError]
-  /// of this [Result].
+  /// of this [Task].
   TaskObject<E, S> swap();
 
   /// Returns the encapsulated `Task` of the given transform function

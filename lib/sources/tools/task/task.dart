@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:dynamic_tools/dynamic_tools.dart';
 
 /// `AsyncTask<S, E>` represents an asynchronous computation.
@@ -9,16 +8,16 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
   /// Returns a new `Task`, mapping any `Successful` value
   /// using the given transformation and unwrapping the produced `Task`.
   Task<W, E> flatMap<W extends Object>(
-      FutureOr<TaskObject<W, E>> Function(S successful) fn,
-      ) {
+    FutureOr<TaskObject<W, E>> Function(S successful) fn,
+  ) {
     return then((result) => result.fold(fn, TaskError.new));
   }
 
   /// Returns a new `Task`, mapping any `Error` value
   /// using the given transformation and unwrapping the produced `Task`.
   Task<S, W> flatMapError<W extends Object>(
-      FutureOr<TaskObject<S, W>> Function(E error) fn,
-      ) {
+    FutureOr<TaskObject<S, W>> Function(E error) fn,
+  ) {
     return then((result) => result.fold(Successful.new, fn));
   }
 
@@ -34,18 +33,18 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
     return then((result) => result.mapError(fn));
   }
 
-  /// Change a [Success] value.
+  /// Change a [Successful] value.
   Task<W, E> pure<W extends Object>(W success) {
     return then((result) => result.pure(success));
   }
 
-  /// Change the [Failure] value.
+  /// Change the [TaskError] value.
   Task<S, W> pureError<W extends Object>(W error) {
     return mapError((_) => error);
   }
 
-  /// Swap the values contained inside the [Success] and [TaskError]
-  /// of this [AsyncResult].
+  /// Swap the values contained inside the [Successful] and [TaskError]
+  /// of this [Task].
   Task<E, S> swap() {
     return then((result) => result.swap());
   }
@@ -54,9 +53,9 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
   /// if this instance represents `Success` or the task of onError function
   /// for the encapsulated value if it is `Error`.
   Future<W> fold<W>(
-      W Function(S success) onSuccess,
-      W Function(E error) onError,
-      ) {
+    W Function(S success) onSuccess,
+    W Function(E error) onError,
+  ) {
     return then<W>((result) => result.fold(onSuccess, onError));
   }
 
@@ -65,7 +64,7 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
     return then((result) => result.getOrNull());
   }
 
-  /// Returns the future value of [F] if any.
+  /// Returns the future value of [E] if any.
   Future<E?> exceptionOrNull() {
     return then((result) => result.exceptionOrNull());
   }
@@ -75,7 +74,7 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
     return then((result) => result.isError());
   }
 
-  /// Returns true if the current task is a [Success].
+  /// Returns true if the current task is a [Successful].
   Future<bool> isSuccess() {
     return then((result) => result.isSuccess());
   }
@@ -102,8 +101,8 @@ extension AsyncTaskExtension<S extends Object, E extends Object> on Task<S, E> {
   /// applied to the encapsulated a `TaskError` or the original
   /// encapsulated value if it is success.
   Task<S, E> recover(
-      FutureOr<TaskObject<S, E>> Function(E error) onError,
-      ) {
+    FutureOr<TaskObject<S, E>> Function(E error) onError,
+  ) {
     return then((result) => result.fold(Successful.new, onError));
   }
 }
