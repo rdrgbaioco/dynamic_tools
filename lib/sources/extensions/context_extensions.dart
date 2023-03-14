@@ -6,7 +6,7 @@ extension ContextExtensions on BuildContext {
     final brightness = MediaQuery.of(this).platformBrightness;
     return brightness == Brightness.dark;
   }
-  
+
   /// Allow to get the [NavigatorState] from the current [BuildContext].
   NavigatorState get navigator {
     return Navigator.of(this);
