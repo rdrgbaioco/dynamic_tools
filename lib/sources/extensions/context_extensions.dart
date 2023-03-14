@@ -1,6 +1,12 @@
 import 'package:dynamic_tools/dynamic_tools.dart';
 
 extension ContextExtensions on BuildContext {
+  /// Returns if the theme is actually in dark mode.
+  bool get isDarkMode {
+    final brightness = MediaQuery.of(this).platformBrightness;
+    return brightness == Brightness.dark;
+  }
+  
   /// Allow to get the [NavigatorState] from the current [BuildContext].
   NavigatorState get navigator {
     return Navigator.of(this);
