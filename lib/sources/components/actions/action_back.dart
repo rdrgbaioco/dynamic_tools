@@ -7,13 +7,13 @@ import 'package:dynamic_tools/dynamic_tools.dart';
 class ActionBack extends StatelessWidget {
   const ActionBack({
     required this.child,
-    this.activeBack = true,
+    this.canBack = true,
     this.onBack,
     super.key,
   });
 
   /// If true, the back action will be blocked.
-  final bool? activeBack;
+  final bool canBack;
 
   /// The action to be performed before the back action.
   final void Function()? onBack;
@@ -25,9 +25,9 @@ class ActionBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.focusScope.unfocus();
+        context.focusScope?.unfocus();
         onBack?.call();
-        return activeBack!;
+        return canBack;
       },
       child: child,
     );

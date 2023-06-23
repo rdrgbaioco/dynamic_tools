@@ -1,10 +1,10 @@
 name: dynamic_tools
 description: Dynamic collection of tools for Flutter development, simplifying usage and some interesting stuff!
-version: 0.0.3
+version: 1.0.0+1
 repository: https://github.com/rdrgbaioco/dynamic_tools
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -15,7 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^4.0.0+1
+  very_good_analysis: ^5.0.0+1
 
 
 flutter:

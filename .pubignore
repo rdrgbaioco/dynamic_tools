@@ -157,3 +157,5 @@ coverage/
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 example/public/index.html
+
+**/lib/sources/tools/task/values

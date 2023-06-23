@@ -1,6 +1,10 @@
+### 1.0.0+1
+
+* Simplify Task.
+
 ### 0.0.3
 
-* Add simple example
+* Add simple example.
 
 #### 0.0.2
 

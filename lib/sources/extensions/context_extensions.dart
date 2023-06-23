@@ -3,7 +3,8 @@ import 'package:dynamic_tools/dynamic_tools.dart';
 extension ContextExtensions on BuildContext {
   /// Returns if the theme is actually in dark mode.
   bool get isDarkMode {
-    final brightness = MediaQuery.of(this).platformBrightness;
+    final brightness = MediaQuery.maybePlatformBrightnessOf(this);
+    if (brightness == null) return false;
     return brightness == Brightness.dark;
   }
 
@@ -13,20 +14,22 @@ extension ContextExtensions on BuildContext {
   }
 
   /// Returns the height size of the current [MediaQuery].
-  double get screenHeight {
-    final screen = MediaQuery.of(this);
-    return screen.size.height;
+  double get currentHeight {
+    return MediaQuery.sizeOf(this).height;
   }
 
   /// Returns the width size of the current [MediaQuery].
-  double get screenWidth {
-    final screen = MediaQuery.of(this);
-    return screen.size.width;
+  double get currentWidth {
+    return MediaQuery.sizeOf(this).width;
+  }
+
+  /// Returns the current size calculated by [MediaQuery].
+  Size get currentSize {
+    return MediaQuery.sizeOf(this);
   }
 
   double get keyboardHeight {
-    final screen = MediaQuery.of(this);
-    return screen.viewInsets.bottom;
+    return MediaQuery.viewInsetsOf(this).bottom;
   }
 
   /// Returns the current [ThemeData].
@@ -45,12 +48,12 @@ extension ContextExtensions on BuildContext {
   }
 
   /// Returns [ScaffoldMessengerState].
-  ScaffoldMessengerState get scaffoldMessenger {
-    return ScaffoldMessenger.of(this);
+  ScaffoldMessengerState? get scaffoldMessenger {
+    return ScaffoldMessenger.maybeOf(this);
   }
 
-  /// Returns [FocusScopeNode].
-  FocusScopeNode get focusScope {
-    return FocusScope.of(this);
+  /// Returns [FocusNode].
+  FocusNode? get focusScope {
+    return Focus.maybeOf(this);
   }
 }

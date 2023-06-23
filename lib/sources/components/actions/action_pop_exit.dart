@@ -16,7 +16,7 @@ class ActionPopExit extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.focusScope.unfocus();
+        context.focusScope?.unfocus();
         final confirm = await dialog(context);
 
         if (confirm == null) {
