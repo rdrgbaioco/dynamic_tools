@@ -1,3 +1,8 @@
+### 2.0.1
+
+Breaking changes.
+* Add PredictiveBack exit for perform actions on navigator pop and gestures back.
+
 ### 1.0.0+1
 
 * Simplify Task.

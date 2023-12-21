@@ -1,4 +1,4 @@
-import 'package:dynamic_tools/dynamic_tools.dart';
+import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
   /// Returns if the theme is actually in dark mode.

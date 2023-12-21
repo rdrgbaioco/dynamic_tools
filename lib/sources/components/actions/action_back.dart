@@ -1,9 +1,10 @@
-import 'package:dynamic_tools/dynamic_tools.dart';
+import 'package:flutter/material.dart';
 
 /// [ActionBack] is used on top of the screen tree to capture the back button
 /// and perform an action before.
 /// It can also be used to block the back action.
-///
+
+@Deprecated('Use [PredictiveBack] instead.')
 class ActionBack extends StatelessWidget {
   const ActionBack({
     required this.child,
@@ -25,7 +26,7 @@ class ActionBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.focusScope?.unfocus();
+        Focus.maybeOf(context)?.unfocus();
         onBack?.call();
         return canBack;
       },

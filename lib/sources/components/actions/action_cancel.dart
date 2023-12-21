@@ -1,5 +1,6 @@
-import 'package:dynamic_tools/dynamic_tools.dart';
+import 'package:flutter/material.dart';
 
+@Deprecated('Use [PredictiveBack] instead.')
 class ActionCancel extends StatelessWidget {
   const ActionCancel({
     required this.dialog,
@@ -16,7 +17,7 @@ class ActionCancel extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.focusScope?.unfocus();
+        Focus.maybeOf(context)?.unfocus();
         final confirm = await dialog(context);
 
         if (confirm == null) {

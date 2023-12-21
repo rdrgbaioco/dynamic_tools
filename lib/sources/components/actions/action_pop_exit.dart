@@ -1,5 +1,8 @@
-import 'package:dynamic_tools/dynamic_tools.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+
+@Deprecated('Use [PredictiveBack] instead.')
 class ActionPopExit extends StatelessWidget {
   const ActionPopExit({
     required this.dialog,
@@ -16,7 +19,7 @@ class ActionPopExit extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        context.focusScope?.unfocus();
+        Focus.maybeOf(context)?.unfocus();
         final confirm = await dialog(context);
 
         if (confirm == null) {
