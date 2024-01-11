@@ -4,46 +4,58 @@ import 'package:flutter/services.dart';
 class PredictiveBack extends StatelessWidget {
   const PredictiveBack({
     required this.child,
-    this.title = 'Deseja cancelar?',
+    this.title = const Text('Are you sure?'),
+    this.content = const SizedBox.shrink(),
+    this.confirmActionLabel = 'Yes',
+    this.cancelActionLabel = 'No',
+    this.canPop = false,
     this.leaveApp = false,
     super.key,
   });
 
-  final String title;
+  final Widget title;
+  final Widget content;
+  final String cancelActionLabel;
+  final String confirmActionLabel;
+  final bool canPop;
   final bool leaveApp;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: canPop,
       onPopInvoked: (didPop) async {
         if (didPop) {
           return;
         }
 
+        Focus.maybeOf(context)?.unfocus();
+
         await showAdaptiveDialog<void>(
           context: context,
           builder: (context) {
             return AlertDialog.adaptive(
-              title: Text(title),
+              title: title,
+              content: content,
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Não'),
+                  child: Text(cancelActionLabel),
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.maybeOf(context)?.pop();
 
                     if (leaveApp) {
                       SystemNavigator.pop(animated: true);
                     }
-                    Navigator.of(context).pop();
+
+                    Navigator.maybeOf(context)?.pop();
                   },
-                  child: const Text('Sim'),
+                  child: Text(confirmActionLabel),
                 ),
               ],
             );

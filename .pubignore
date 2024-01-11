@@ -158,4 +158,8 @@ coverage/
 !/dev/ci/**/Gemfile.lock
 example/public/index.html
 
-**/lib/sources/tools/task/values
+lib/sources/tools/task/task.dart
+lib/sources/tools/task/task_object.dart
+lib/sources/tools/task/values/successful.dart
+lib/sources/tools/task/values/task_error.dart
+lib/sources/tools/task/values/unit.dart

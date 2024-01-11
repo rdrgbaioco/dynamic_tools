@@ -50,12 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    print('dispose');
-  }
-
-  @override
   Widget build(BuildContext context) {
     return PredictiveBack(
       leaveApp: true,
@@ -144,6 +138,10 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PredictiveBack(
+      title: Text(
+          'Are you sure?',
+          style: context.textTheme.titleMedium,
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Second Page'),
